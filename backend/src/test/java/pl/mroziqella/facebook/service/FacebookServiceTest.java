@@ -48,6 +48,12 @@ public class FacebookServiceTest {
         Assert.assertEquals(facebookUser,byId);
     }
 
+    @Test(expected=NotFoundException.class)
+    public void findByIdExeptionTest() throws NotFoundException {
+        facebookService.findById("5");
+
+    }
+
     @Test
     public void findAllTest(){
 

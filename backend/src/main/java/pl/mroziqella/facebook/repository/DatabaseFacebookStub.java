@@ -3,6 +3,7 @@ package pl.mroziqella.facebook.repository;
 import org.springframework.stereotype.Repository;
 import pl.mroziqella.facebook.exeption.InsertExeption;
 import pl.mroziqella.facebook.model.Facebook;
+import pl.mroziqella.facebook.model.Post;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import java.util.TreeMap;
  * Created by Mroziqella on 08.06.2017.
  */
 @Repository
-class DatabaseStub implements FacebookRepository {
+class DatabaseFacebookStub implements FacebookRepository {
     private final static Map<String, Facebook> FACEBOOK_MAP = new TreeMap<>();
 
     @Override
@@ -48,4 +49,7 @@ class DatabaseStub implements FacebookRepository {
     public Collection<Facebook> findAll() {
         return FACEBOOK_MAP.values();
     }
+
+
+
 }

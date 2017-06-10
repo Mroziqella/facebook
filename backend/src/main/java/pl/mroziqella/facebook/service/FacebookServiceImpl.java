@@ -26,7 +26,11 @@ class FacebookServiceImpl implements FacebookService {
 
     @Override
     public Facebook findById(String id) throws NotFoundException {
-        return facebookRepository.getById(id);
+        Facebook facebookItem = facebookRepository.getById(id);
+        if(facebookItem==null){
+            throw new NotFoundException();
+        }
+        return facebookItem ;
     }
 
     @Override

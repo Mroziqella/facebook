@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.mroziqella.facebook.model.Facebook;
 import pl.mroziqella.facebook.model.Post;
 import pl.mroziqella.facebook.repository.FacebookRepository;
+import pl.mroziqella.facebook.repository.PostRepository;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,6 +29,8 @@ class ImportProfile {
     private Gson gson;
     @Autowired
     private FacebookRepository facebookRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     Map<Type, Object> importFromJsonFile(String fileName) {
         BufferedReader jsonFile = new BufferedReader(
@@ -47,8 +50,13 @@ class ImportProfile {
     void importAllfromJsonFile() {
         int fileCount = fileCount();
         for (int i = 1; i <= fileCount; i++) {
-            Facebook facebookItem = (Facebook) importFromJsonFile("f" + i).get(Facebook.class);
+            Map<Type, Object> typeObjectMap = importFromJsonFile("f" + i);
+            Facebook facebookItem = (Facebook) typeObjectMap.get(Facebook.class);
+
             facebookRepository.insert(facebookItem);
+
+            List<Post> posts= (List<Post>)typeObjectMap.get(Post.class);
+            posts.forEach(p->postRepository.insert(p));
 
         }
     }

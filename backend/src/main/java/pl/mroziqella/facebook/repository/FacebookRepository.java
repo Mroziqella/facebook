@@ -8,13 +8,6 @@ import java.util.Collections;
 /**
  * Created by Mroziqella on 08.06.2017.
  */
-public interface FacebookRepository {
+public interface FacebookRepository extends RepositoryTemplate<Facebook> {
 
-    void insert(Facebook facebook);
-
-    Facebook getById(String id);
-
-    int countElement();
-
-    Collection<Facebook> findAll();
 }
