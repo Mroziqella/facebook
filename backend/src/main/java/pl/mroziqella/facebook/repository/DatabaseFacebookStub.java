@@ -3,10 +3,8 @@ package pl.mroziqella.facebook.repository;
 import org.springframework.stereotype.Repository;
 import pl.mroziqella.facebook.exeption.InsertExeption;
 import pl.mroziqella.facebook.model.Facebook;
-import pl.mroziqella.facebook.model.Post;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -33,6 +31,13 @@ class DatabaseFacebookStub implements FacebookRepository {
         return FACEBOOK_MAP.get(id);
     }
 
+
+    @Override
+    public Collection<Facebook> findAll() {
+        return FACEBOOK_MAP.values();
+    }
+
+
     private void validation(Facebook facebook){
         if (facebook.getId() == null) {
             throw new InsertExeption("Id is NULL!!!");
@@ -44,12 +49,5 @@ class DatabaseFacebookStub implements FacebookRepository {
             throw new InsertExeption("Id existis!!!");
         }
     }
-
-    @Override
-    public Collection<Facebook> findAll() {
-        return FACEBOOK_MAP.values();
-    }
-
-
 
 }

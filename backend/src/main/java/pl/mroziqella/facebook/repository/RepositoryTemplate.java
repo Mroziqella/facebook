@@ -1,6 +1,6 @@
 package pl.mroziqella.facebook.repository;
 
-import pl.mroziqella.facebook.model.Facebook;
+import pl.mroziqella.facebook.exeption.NotImplementExeption;
 
 import java.util.Collection;
 
@@ -9,11 +9,19 @@ import java.util.Collection;
  */
 public interface RepositoryTemplate<T> {
 
-    void insert(T object);
+    default void insert(T object){
+        throw new NotImplementExeption();
+    }
 
-    T getById(String id);
+    default T getById(String id){
+        throw new NotImplementExeption();
+    }
 
-    int countElement();
+    default int countElement(){
+        throw new NotImplementExeption();
+    }
 
-    Collection<T> findAll();
+    default Collection<T> findAll(){
+        throw new NotImplementExeption();
+    }
 }

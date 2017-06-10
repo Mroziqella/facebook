@@ -1,0 +1,23 @@
+
+ <table class="table">
+   <thead>
+   <tr>
+     <th>Firstname</th>
+     <th>Lastname</th>
+     <th>Country</th>
+     <th>City</th>
+     <th>Age</th>
+     <th>Go to</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr *ngFor="let profile of facebookProfiles | async">
+    <td>{{profile.firstname}}</td>
+     <td>{{profile.lastname}}</td>
+     <td>{{profile.city.countryName}}</td>
+     <td>{{profile.city.cityName}}</td>
+     <td>{{profile.birthday | date: 'dd/MM/yyyy'}}</td>
+     <td><button class="btn btn-default" (click)="goToDetalis(profile.id)">GO!</button> </td>
+   </tr>
+   </tbody>
+ </table>

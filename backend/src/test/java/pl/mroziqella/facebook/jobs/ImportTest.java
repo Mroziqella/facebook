@@ -3,9 +3,8 @@ package pl.mroziqella.facebook.jobs;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.mroziqella.facebook.configuration.Config;
@@ -23,6 +22,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = Config.class)
+@ActiveProfiles(profiles = "test")
 public class ImportTest {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class ImportTest {
 
 	@Test
 	public void countFileInDirectoryTest(){
-		assertEquals(importProfile.fileCount(),2);
+		assertEquals(importProfile.filesCount(),2);
 	}
 
 	@Test
@@ -55,6 +55,7 @@ public class ImportTest {
 
 		assertEquals(2, facebookRepository.countElement());
 		assertEquals("Kuna", facebookRepository.getById("2").getFirstname());
+		assertEquals(6,postRepository.countElement());
 
 	}
 

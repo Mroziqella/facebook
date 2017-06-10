@@ -1,7 +1,5 @@
 package pl.mroziqella.facebook.repository;
 
-import javafx.geometry.Pos;
-import pl.mroziqella.facebook.model.Facebook;
 import pl.mroziqella.facebook.model.Post;
 
 /**

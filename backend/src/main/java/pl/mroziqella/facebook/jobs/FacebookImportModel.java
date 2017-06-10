@@ -1,8 +1,14 @@
-package pl.mroziqella.facebook.model;
+package pl.mroziqella.facebook.jobs;
+
+import pl.mroziqella.facebook.model.City;
+import pl.mroziqella.facebook.model.Post;
 
 import java.util.List;
 
-public class Facebook implements Comparable<Facebook>{
+/**
+ * Created by Mroziqella on 10.06.2017.
+ */
+class FacebookImportModel {
 
     private String id;
     private Long birthday;
@@ -16,9 +22,19 @@ public class Facebook implements Comparable<Facebook>{
     private String school;
     private String location;
     private String relationship;
-    private List<String> postsId;
+    private List<Post> posts;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
 
     public String getId() {
+
         return id;
     }
 
@@ -114,35 +130,26 @@ public class Facebook implements Comparable<Facebook>{
         this.relationship = relationship;
     }
 
-    public List<String> getPostsId() {
-        return postsId;
-    }
-
-    public void setPostsId(List<String> postsId) {
-        this.postsId = postsId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Facebook facebook = (Facebook) o;
+        FacebookImportModel that = (FacebookImportModel) o;
 
-        if (id != null ? !id.equals(facebook.id) : facebook.id != null) return false;
-        if (birthday != null ? !birthday.equals(facebook.birthday) : facebook.birthday != null) return false;
-        if (firstname != null ? !firstname.equals(facebook.firstname) : facebook.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(facebook.lastname) : facebook.lastname != null) return false;
-        if (occupation != null ? !occupation.equals(facebook.occupation) : facebook.occupation != null) return false;
-        if (gender != null ? !gender.equals(facebook.gender) : facebook.gender != null) return false;
-        if (city != null ? !city.equals(facebook.city) : facebook.city != null) return false;
-        if (work != null ? !work.equals(facebook.work) : facebook.work != null) return false;
-        if (friends != null ? !friends.equals(facebook.friends) : facebook.friends != null) return false;
-        if (school != null ? !school.equals(facebook.school) : facebook.school != null) return false;
-        if (location != null ? !location.equals(facebook.location) : facebook.location != null) return false;
-        if (relationship != null ? !relationship.equals(facebook.relationship) : facebook.relationship != null)
-            return false;
-        return postsId != null ? postsId.equals(facebook.postsId) : facebook.postsId == null;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
+        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (occupation != null ? !occupation.equals(that.occupation) : that.occupation != null) return false;
+        if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
+        if (work != null ? !work.equals(that.work) : that.work != null) return false;
+        if (friends != null ? !friends.equals(that.friends) : that.friends != null) return false;
+        if (school != null ? !school.equals(that.school) : that.school != null) return false;
+        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (relationship != null ? !relationship.equals(that.relationship) : that.relationship != null) return false;
+        return posts != null ? posts.equals(that.posts) : that.posts == null;
     }
 
     @Override
@@ -159,16 +166,7 @@ public class Facebook implements Comparable<Facebook>{
         result = 31 * result + (school != null ? school.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + (relationship != null ? relationship.hashCode() : 0);
-        result = 31 * result + (postsId != null ? postsId.hashCode() : 0);
+        result = 31 * result + (posts != null ? posts.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public int compareTo(Facebook o) {
-        int i = firstname.compareTo(o.firstname);
-        if(i==0){
-            i = lastname.compareTo(o.lastname);
-        }
-        return i;
     }
 }

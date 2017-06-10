@@ -1,14 +1,14 @@
 package pl.mroziqella.facebook.jobs;
 
 import com.google.gson.Gson;
-import javafx.geometry.Pos;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import pl.mroziqella.facebook.model.Facebook;
 import pl.mroziqella.facebook.model.Post;
 import pl.mroziqella.facebook.repository.FacebookRepository;
 import pl.mroziqella.facebook.repository.PostRepository;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 /**
  * Created by Mroziqella on 08.06.2017.
  */
-@Service
 class ImportProfile {
 
     @Autowired
@@ -31,15 +30,21 @@ class ImportProfile {
     private FacebookRepository facebookRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    private final Boolean isProduction;
+
+    public ImportProfile(Boolean isProduction) {
+        this.isProduction = isProduction;
+    }
 
     Map<Type, Object> importFromJsonFile(String fileName) {
-        BufferedReader jsonFile = new BufferedReader(
-                new InputStreamReader(this.getClass()
-                        .getResourceAsStream("/files/" + fileName + ".json")));
+        FacebookImportModel facebookImport = gson.fromJson(readJsonFile(fileName), FacebookImportModel.class);
 
-        FacebookImport facebookImport = gson.fromJson(jsonFile, FacebookImport.class);
-        Facebook facebook = facebookImport;
-        facebook.setPostsId(mapperListIdPost(facebookImport.getPosts()));
+        List<Post> posts = facebookImport.getPosts();
+        Facebook facebook = modelMapper.map(facebookImport,Facebook.class);
+        facebook.setPostsId(mapperListIdsPost(posts));
 
         return new HashMap<Type,Object>() {{
             put(Facebook.class, facebook);
@@ -47,30 +52,48 @@ class ImportProfile {
         }};
     }
 
+    @PostConstruct
+    private void init(){
+        if(isProduction) {
+            importAllfromJsonFile();
+        }
+    }
+
     void importAllfromJsonFile() {
-        int fileCount = fileCount();
-        for (int i = 1; i <= fileCount; i++) {
-            Map<Type, Object> typeObjectMap = importFromJsonFile("f" + i);
+        int fileCount = filesCount();
+        for (long i = 1; i <= fileCount; i++) {
+            Map<Type, Object> typeObjectMap = importFromJsonFile(buildFileName(i));
             Facebook facebookItem = (Facebook) typeObjectMap.get(Facebook.class);
 
             facebookRepository.insert(facebookItem);
 
             List<Post> posts= (List<Post>)typeObjectMap.get(Post.class);
+
             posts.forEach(p->postRepository.insert(p));
 
         }
     }
 
-    int fileCount() {
+    private BufferedReader readJsonFile(String fileName){
+        return new BufferedReader(
+                new InputStreamReader(this.getClass()
+                        .getResourceAsStream("/files/" + fileName + ".json")));
+    }
+
+   private String buildFileName(Long number){
+        return "f" + number;
+    }
+
+    int filesCount() {
         return new File(getClass().getResource("/files").getPath()).list().length;
     }
 
-    List<String> mapperListIdPost(List<Post> posts) {
+    private List<String> mapperListIdsPost(List<Post> posts) {
         if (posts != null) {
-            List<String> postsId = posts.stream()
+            List<String> postsIds = posts.stream()
                     .map(Post::getId)
                     .collect(Collectors.toList());
-            return postsId;
+            return postsIds;
         }
         return Collections.emptyList();
     }
