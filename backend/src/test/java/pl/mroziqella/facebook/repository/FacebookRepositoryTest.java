@@ -1,4 +1,4 @@
-package pl.mroziqella.facebook.tools;
+package pl.mroziqella.facebook.repository;
 
 import org.junit.Test;
 import pl.mroziqella.facebook.exeption.InsertExeption;
@@ -13,7 +13,7 @@ public class FacebookRepositoryTest {
 
 
     @Test(expected=InsertExeption.class)
-    public void insertToDatabaseExeptionIdIsExistis(){
+    public void insertToDatabaseExeptionIdIsExistisTest(){
         Facebook facebook = new Facebook();
         facebook.setId("2");
         facebookRepository.insert(facebook);
@@ -21,23 +21,24 @@ public class FacebookRepositoryTest {
     }
 
     @Test(expected=InsertExeption.class)
-    public void insertToDatabaseExeptionIdIsNull(){
+    public void insertToDatabaseExeptionIdIsNullTest(){
         Facebook facebook = new Facebook();
         facebook.setId(null);
         facebookRepository.insert(facebook);
     }
 
     @Test(expected=InsertExeption.class)
-    public void insertToDatabaseExeptionIdIsEmpty(){
+    public void insertToDatabaseExeptionIdIsEmptyTest(){
         Facebook facebook = new Facebook();
         facebook.setId("");
         facebookRepository.insert(facebook);
     }
 
     @Test(expected=InsertExeption.class)
-    public void insertToDatabaseExeptionIdIsEmptySpace(){
+    public void insertToDatabaseExeptionIdIsEmptySpaceTest(){
         Facebook facebook = new Facebook();
         facebook.setId("       ");
         facebookRepository.insert(facebook);
     }
+
 }

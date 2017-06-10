@@ -1,21 +1,28 @@
 package pl.mroziqella.facebook.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.mroziqella.facebook.exeption.NotFoundException;
 import pl.mroziqella.facebook.exeption.NotImplementExeption;
 import pl.mroziqella.facebook.model.Facebook;
-import pl.mroziqella.facebook.tools.FacebookRepository;
+import pl.mroziqella.facebook.repository.FacebookRepository;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Mroziqella on 09.06.2017.
  */
-public class FacebookServiceImpl implements FacebookService {
+@Service
+class FacebookServiceImpl implements FacebookService {
+
+    private FacebookRepository facebookRepository;
 
     @Autowired
-    private FacebookRepository facebookRepository;
+    public FacebookServiceImpl(FacebookRepository facebookRepository) {
+        this.facebookRepository = facebookRepository;
+    }
 
     @Override
     public Facebook findById(String id) throws NotFoundException {
@@ -34,6 +41,6 @@ public class FacebookServiceImpl implements FacebookService {
 
     @Override
     public Set<Facebook> findAll() {
-        throw new NotImplementExeption();
+        return new TreeSet<>(facebookRepository.findAll());
     }
 }

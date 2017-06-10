@@ -1,14 +1,18 @@
-package pl.mroziqella.facebook.tools;
+package pl.mroziqella.facebook.repository;
 
+import org.springframework.stereotype.Repository;
 import pl.mroziqella.facebook.exeption.InsertExeption;
 import pl.mroziqella.facebook.model.Facebook;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
  * Created by Mroziqella on 08.06.2017.
  */
+@Repository
 class DatabaseStub implements FacebookRepository {
     private final static Map<String, Facebook> FACEBOOK_MAP = new TreeMap<>();
 
@@ -38,5 +42,10 @@ class DatabaseStub implements FacebookRepository {
         if (FACEBOOK_MAP.containsKey(facebook.getId())) {
             throw new InsertExeption("Id existis!!!");
         }
+    }
+
+    @Override
+    public Collection<Facebook> findAll() {
+        return FACEBOOK_MAP.values();
     }
 }

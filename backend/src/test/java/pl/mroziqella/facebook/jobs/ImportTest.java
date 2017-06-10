@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.mroziqella.facebook.configuration.Config;
 import pl.mroziqella.facebook.model.Facebook;
-import pl.mroziqella.facebook.tools.FacebookRepository;
+import pl.mroziqella.facebook.repository.FacebookRepository;
 
 
 import static org.junit.Assert.*;
@@ -29,7 +29,7 @@ public class ImportTest {
 
 	@Test
 	public void importFile(){
-		Facebook f1 = importProfile.importFromJsonFile("f1");
+		Facebook f1 = (Facebook) importProfile.importFromJsonFile("f1").get(Facebook.class);
 
 		assertEquals("Luna",f1.getFirstname());
 	}

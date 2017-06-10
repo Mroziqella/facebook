@@ -3,7 +3,7 @@ package pl.mroziqella.facebook.model;
 import java.util.List;
 import java.util.Map;
 
-public class Facebook {
+public class Facebook implements Comparable<Facebook>{
 
     private String id;
     private Long birthday;
@@ -17,8 +17,7 @@ public class Facebook {
     private String school;
     private String location;
     private String relationship;
-    private List<Post> posts;
-    private Map<String, Object> additionalProperties;
+    private List<String> postsId;
 
     public String getId() {
         return id;
@@ -116,20 +115,12 @@ public class Facebook {
         this.relationship = relationship;
     }
 
-    public List<Post> getPosts() {
-        return posts;
+    public List<String> getPostsId() {
+        return postsId;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public void setPostsId(List<String> postsId) {
+        this.postsId = postsId;
     }
 
     @Override
@@ -139,6 +130,7 @@ public class Facebook {
 
         Facebook facebook = (Facebook) o;
 
+        if (id != null ? !id.equals(facebook.id) : facebook.id != null) return false;
         if (birthday != null ? !birthday.equals(facebook.birthday) : facebook.birthday != null) return false;
         if (firstname != null ? !firstname.equals(facebook.firstname) : facebook.firstname != null) return false;
         if (lastname != null ? !lastname.equals(facebook.lastname) : facebook.lastname != null) return false;
@@ -151,13 +143,13 @@ public class Facebook {
         if (location != null ? !location.equals(facebook.location) : facebook.location != null) return false;
         if (relationship != null ? !relationship.equals(facebook.relationship) : facebook.relationship != null)
             return false;
-        if (posts != null ? !posts.equals(facebook.posts) : facebook.posts != null) return false;
-        return additionalProperties != null ? additionalProperties.equals(facebook.additionalProperties) : facebook.additionalProperties == null;
+        return postsId != null ? postsId.equals(facebook.postsId) : facebook.postsId == null;
     }
 
     @Override
     public int hashCode() {
-        int result = birthday != null ? birthday.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (occupation != null ? occupation.hashCode() : 0);
@@ -168,8 +160,16 @@ public class Facebook {
         result = 31 * result + (school != null ? school.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + (relationship != null ? relationship.hashCode() : 0);
-        result = 31 * result + (posts != null ? posts.hashCode() : 0);
-        result = 31 * result + (additionalProperties != null ? additionalProperties.hashCode() : 0);
+        result = 31 * result + (postsId != null ? postsId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(Facebook o) {
+        int i = firstname.compareTo(o.firstname);
+        if(i==0){
+            i = lastname.compareTo(o.lastname);
+        }
+        return i;
     }
 }
