@@ -1,23 +1,58 @@
-
- <table class="table">
-   <thead>
-   <tr>
-     <th>Firstname</th>
-     <th>Lastname</th>
-     <th>Country</th>
-     <th>City</th>
-     <th>Age</th>
-     <th>Go to</th>
-   </tr>
-   </thead>
-   <tbody>
-   <tr *ngFor="let profile of facebookProfiles | async">
-    <td>{{profile.firstname}}</td>
-     <td>{{profile.lastname}}</td>
-     <td>{{profile.city.countryName}}</td>
-     <td>{{profile.city.cityName}}</td>
-     <td>{{profile.birthday | date: 'dd/MM/yyyy'}}</td>
-     <td><button class="btn btn-default" (click)="goToDetalis(profile.id)">GO!</button> </td>
-   </tr>
-   </tbody>
- </table>
+<div class="container">
+  <div class="col-xs-7">
+    <h3>Lista użytkowników</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Państwo</th>
+        <th>Miasto</th>
+        <th>Wiek</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let profile of facebookProfiles | async">
+        <td>{{profile.firstname}}</td>
+        <td>{{profile.lastname}}</td>
+        <td>{{profile.city.countryName}}</td>
+        <td>{{profile.city.cityName}}</td>
+        <td>{{profile.birthday | date: 'dd/MM/yyyy'}}</td>
+        <td>
+          <button class="btn btn-default" (click)="goToDetalis(profile.id)">Wejdź!</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-5">
+    <h3>Najpopularniejsze słowa (min 4 litery)</h3>
+    <br>
+    <div class="col-xs-9 col-xs-offset-0">
+      <b>Slowo</b>
+    </div>
+    <div class="col-xs-3">
+      <b>Wystąpienia</b>
+    </div>
+    <hr>
+    <div *ngFor="let key of wordsMap | keys ">
+      <div class="col-xs-9 col-xs-offset-0">
+        {{key.key}}
+      </div>
+      <div class="col-xs-3">
+        <div class="col-xs-4 col-xs-offset-2">
+          {{key.value}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-9  space-line-top">
+        <input type="text" class="form-control" placeholder="Wpisz słowo">
+      </div>
+      <div class="col-xs-3  space-line-top">
+        <button class="btn btn-default" [(ngModel)]="search">Szukaj!</button>
+      </div>
+    </div>
+  </div>
+</div>

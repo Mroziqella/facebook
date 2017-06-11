@@ -9,6 +9,7 @@ import {Profilesomponent} from "./home/profiles.component";
 import {FacebookProfileComponent} from "./facebook/facebook.profile.component";
 import {MapComponent} from "./map/map.component";
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import {KeysPipe} from "./home/KeysPipe";
 
 const routes: Routes = [
   { path: '', component: Profilesomponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
     AppComponent,
     Profilesomponent,
     FacebookProfileComponent,
-    MapComponent
+    MapComponent,
+    KeysPipe,
   ],
   imports: [
     BrowserModule,

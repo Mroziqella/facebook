@@ -9,6 +9,7 @@ import pl.mroziqella.facebook.exeption.NotFoundException;
 import pl.mroziqella.facebook.model.Facebook;
 import pl.mroziqella.facebook.service.FacebookService;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -30,6 +31,11 @@ class FacebookController {
     @GetMapping("/go/{id}")
     private Facebook getProfile(@PathVariable String id) throws NotFoundException {
         return facebookService.findById(id);
+    }
+
+    @GetMapping("/getWords")
+    private Map<String,Long> getWords() {
+        return facebookService.findMostCommonWords();
     }
 
 }

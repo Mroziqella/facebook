@@ -18,4 +18,10 @@ export class FacebookService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+  getWordsMap():Observable<any> {
+    return this.http.get("/api/getWords")
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 }
