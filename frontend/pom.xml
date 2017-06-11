@@ -46,7 +46,6 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-
                         <configuration>
                             <arguments>run build</arguments>
                         </configuration>
@@ -62,7 +61,7 @@
                     <execution>
                         <id>copy-resources</id>
                         <!-- here the phase you need -->
-                        <phase>validate</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
