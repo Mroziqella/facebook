@@ -1,4 +1,5 @@
-# ng2boot
-A minimal Angular2 and Spring Boot starter project
+#Uruchomienie aplikacji
 
-The steps to create this project are described in detail in this blog post: https://blog.jdriven.com/2016/12/angular2-spring-boot-getting-started
+1. mvn clean install
+
+2. mvn spring-boot:run
