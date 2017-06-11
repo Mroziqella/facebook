@@ -38,7 +38,7 @@
     </div>
     <hr>
     <div *ngFor="let key of wordsMap | keys " >
-      <a class="col-xs-9 col-xs-offset-0" (click)="setSearch(key)">
+      <a class="col-xs-9 col-xs-offset-0" (click)="setSearch(key);searchWord(search);">
         {{key.key}}
       </a>
       <div class="col-xs-3">

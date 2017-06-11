@@ -26,7 +26,7 @@ const routes: Routes = [
     FacebookProfileComponent,
     MapComponent,
     KeysPipe,
-    PostComponent
+    PostComponent,
   ],
   imports: [
     BrowserModule,
