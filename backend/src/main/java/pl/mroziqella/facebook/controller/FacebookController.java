@@ -1,10 +1,7 @@
 package pl.mroziqella.facebook.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.mroziqella.facebook.exeption.NotFoundException;
 import pl.mroziqella.facebook.model.Facebook;
 import pl.mroziqella.facebook.service.FacebookService;
@@ -38,4 +35,8 @@ class FacebookController {
         return facebookService.findMostCommonWords();
     }
 
+    @GetMapping("/search")
+    private Set<String> searchWord(@RequestParam String word){
+        return facebookService.findPostIdsByKeyword(word);
+    }
 }

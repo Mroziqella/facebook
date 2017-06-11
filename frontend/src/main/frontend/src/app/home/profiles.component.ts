@@ -11,6 +11,8 @@ import {Router} from "@angular/router";
 export class Profilesomponent implements OnInit{
   facebookProfiles: any;
   wordsMap: any;
+  search:string;
+  foundPosts: string[];
 
   constructor(private router:Router,private facebookService: FacebookService) {
     this.facebookProfiles=facebookService.getFacebooksProfile();
@@ -31,6 +33,17 @@ export class Profilesomponent implements OnInit{
         this.wordsMap = words;
       }
     )
+  }
+  setSearch(item:any){
+    this.search=item.key;
+  }
+  searchWord(word:string){
+    console.log(word);
+    this.facebookService.searchWord(word).subscribe(
+      posts=>{
+        this.foundPosts=posts;
+      }
+    );
   }
 
 }
