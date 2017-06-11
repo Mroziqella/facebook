@@ -4,10 +4,10 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'home',
-  templateUrl: './home.component.html',
+  templateUrl: 'profiles.component.html',
   providers:[FacebookService]
 })
-export class HomeComponent {
+export class Profilesomponent {
   facebookProfiles: any;
 
   constructor(private router:Router,private facebookService: FacebookService) {

@@ -5,12 +5,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {Routes, RouterModule} from "@angular/router";
-import {HomeComponent} from "./home/home.component";
+import {Profilesomponent} from "./home/profiles.component";
 import {FacebookProfileComponent} from "./facebook/facebook.profile.component";
-
+import {MapComponent} from "./map/map.component";
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: Profilesomponent},
   {path:'go/:id',component:FacebookProfileComponent}
 ];
 
@@ -18,13 +19,17 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    FacebookProfileComponent
+    Profilesomponent,
+    FacebookProfileComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyDNjG3S7Vw1z7t3dI8cRyQLEO0LBPB5pVE'
+    }),
     RouterModule.forRoot(routes, { useHash: false })
   ],
   providers: [],

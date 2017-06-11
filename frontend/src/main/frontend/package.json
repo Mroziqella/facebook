@@ -10,6 +10,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SebastianM/angular2-google-maps-quickstart"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "^4.0.0",
@@ -23,7 +27,8 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4",
-    "bootstrap":"3.3.7"
+    "bootstrap":"3.3.7",
+    "angular2-google-maps": "0.17.0"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
