@@ -75,3 +75,10 @@ body {
   background-color: #efefef;
   text-align: center;
 }
+
+.myHr{
+  width: 100%;
+  color: black;
+  height: 1px;
+  background-color:black;
+}
