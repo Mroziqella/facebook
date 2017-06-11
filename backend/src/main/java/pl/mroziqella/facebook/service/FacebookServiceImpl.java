@@ -51,8 +51,9 @@ class FacebookServiceImpl implements FacebookService {
 
     @Override
     public Set<String> findPostIdsByKeyword(String word) {
+        final String wordLowerCase = word.toLowerCase();
         return postRepository.findAll().stream()
-                .filter(p -> p.getMessage().matches(".*\\b" + word + "\\b.*"))
+                .filter(p -> p.getMessage().toLowerCase().matches(".*\\b" + wordLowerCase + "\\b.*"))
                 .map(Post::getId).collect(Collectors.toSet());
     }
 

@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.mroziqella.facebook.exeption.NotFoundException;
 import pl.mroziqella.facebook.model.Facebook;
+import pl.mroziqella.facebook.model.Post;
 import pl.mroziqella.facebook.service.FacebookService;
+import pl.mroziqella.facebook.service.PostService;
 
 import java.util.Map;
 import java.util.Set;
@@ -17,12 +19,13 @@ import java.util.Set;
 class FacebookController {
     @Autowired
     private FacebookService facebookService;
+    @Autowired
+    private PostService postService;
 
 
     @GetMapping("/getAll")
     private Set<Facebook> getAll(){
-        Set<Facebook> all = facebookService.findAll();
-        return all;
+        return facebookService.findAll();
     }
 
     @GetMapping("/go/{id}")
@@ -38,5 +41,10 @@ class FacebookController {
     @GetMapping("/search")
     private Set<String> searchWord(@RequestParam String word){
         return facebookService.findPostIdsByKeyword(word);
+    }
+
+    @GetMapping("/post")
+    private Post getPost(@RequestParam String id){
+        return postService.findById(id);
     }
 }

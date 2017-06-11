@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-xs-7">
+  <div class="col-md-7">
     <h3>Lista użytkowników</h3>
     <table class="table">
       <thead>
@@ -26,7 +26,7 @@
       </tbody>
     </table>
   </div>
-  <div class="col-xs-5">
+  <div class="col-md-5">
     <h3>Najpopularniejsze słowa (min 4 litery)</h3>
     <br>
     <div class="col-xs-9 col-xs-offset-0">
@@ -62,4 +62,9 @@
       </a>
     </div>
   </div>
+  <h3 [hidden]="foundPosts==null || foundPosts?.length==0">Znalezione posty</h3>
+  <p  *ngFor="let post of foundPosts">
+    <a>#{{post}}</a>
+    <post [id]="post"></post>
+  </p>
 </div>

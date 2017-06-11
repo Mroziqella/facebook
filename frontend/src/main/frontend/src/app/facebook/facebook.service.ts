@@ -25,8 +25,14 @@ export class FacebookService {
   }
 
   searchWord(word:string):Observable<any> {
-
     return this.http.get("/api/search?word="+word)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+
+  getPost(id:string):Observable<any> {
+    return this.http.get("/api/post?id="+id)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

@@ -29,4 +29,9 @@ class DatabasePostSub implements PostRepository {
     public Collection<Post> findAll() {
         return POST_MAP.values();
     }
+
+    @Override
+    public Post getById(String id) {
+        return POST_MAP.get(id);
+    }
 }

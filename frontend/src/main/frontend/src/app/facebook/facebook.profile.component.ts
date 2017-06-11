@@ -27,7 +27,6 @@ export class FacebookProfileComponent implements OnInit {
     this.facebookService.getProfile(id).subscribe(
       profile => {
         this.profileDetails = profile;
-        console.log(this.profileDetails);
         this.loaded=true;
       }
     )
