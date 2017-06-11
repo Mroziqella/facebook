@@ -4,11 +4,11 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'home',
-  templateUrl: 'profiles.component.html',
+  templateUrl: 'home.component.html',
   providers:[FacebookService],
 
 })
-export class Profilesomponent implements OnInit{
+export class HomeComponent implements OnInit{
   facebookProfiles: any;
   wordsMap: any;
   search:string;

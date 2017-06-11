@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {Routes, RouterModule} from "@angular/router";
-import {Profilesomponent} from "./home/profiles.component";
+import {HomeComponent} from "./home/home.component";
 import {FacebookProfileComponent} from "./facebook/facebook.profile.component";
 import {MapComponent} from "./map/map.component";
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -13,7 +13,7 @@ import {KeysPipe} from "./home/KeysPipe";
 import {PostComponent} from "./post/post.component";
 
 const routes: Routes = [
-  { path: '', component: Profilesomponent},
+  { path: '', component: HomeComponent},
   {path:'go/:id',component:FacebookProfileComponent},
   {path:'post/:id',component:PostComponent}
 ];
@@ -22,7 +22,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    Profilesomponent,
+    HomeComponent,
     FacebookProfileComponent,
     MapComponent,
     KeysPipe,

@@ -26,7 +26,6 @@
                     <npmVersion>4.4.1</npmVersion>
                     <workingDirectory>src/main/frontend</workingDirectory>
                 </configuration>
-
                 <executions>
                     <execution>
                         <id>install node and npm</id>
@@ -55,6 +54,31 @@
 
                 </executions>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/static/node_modules/bootstrap</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/frontend/node_modules/bootstrap</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
 
         <resources>
@@ -64,5 +88,11 @@
             </resource>
         </resources>
 
+
+
     </build>
+
+
+
+
 </project>
